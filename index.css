@@ -1,0 +1,162 @@
+#root {
+  position: relative;
+}
+table thead input {
+  width: 100%;
+}
+
+table {
+  margin: 0 auto;
+}
+
+td {
+  width: 210px;
+  padding: 0 5px;
+}
+
+thead > tr > td:nth-child(2),
+tbody > tr > td:nth-child(2) {
+  width: 50px;
+  text-align: center;
+}
+
+tbody > tr:nth-child(2n) {
+  background-color: #8bd88f;
+}
+
+tbody > tr:nth-child(2n-1) {
+  background-color: #47e282;
+}
+
+[data-status="inactive"] {
+  color: #8a8a8a;
+}
+
+[data-status="active"] {
+  color: #000000;
+}
+
+.modal {
+  transition: opacity 400ms ease-in;
+  opacity: 0;
+  pointer-events: none;
+  background-color: #fff;
+  position: fixed;
+  width: 500px;
+  height: 200px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; 
+  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal-success, #loading {
+  width: 300px;
+  height: 150px;
+}
+
+#modal-confirm.is-shown, #modal-success.is-shown, #loading.is-shown {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1000;
+}
+
+.overlay {
+  transition: opacity 500ms ease-in;
+  opacity: 0; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #80808098;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.overlay.is-shown {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+#instant-overlay {
+  transition: opacity 20ms ease-in;
+  background-color: #dfdfdf98;
+}
+
+.modal-header {
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #eceeef;
+  align-items: center;
+}
+
+.modal-header div {
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.modal-body {
+  display: flex;
+  padding-top: 50px;
+}
+
+.modal-body button {
+  margin: 0 50px;
+}
+
+.tooltip-border {
+  border: 1px solid #ca1919;
+}
+
+.tooltip {
+  position: fixed;
+  padding: 10px 20px;
+  border: 1px solid #ca1919;
+  border-radius: 4px;
+  text-align: center;
+  color: #333;
+  background: #fff;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination > div {
+  display: inline-block;
+}
+
+.pagination button {
+  margin: 0 5px;
+}
+
+.pagination input {
+  width: 30px;
+}
+
+#no-data {
+  display: flex;
+  justify-content: center;
+}
+
+#no-data[hidden] {
+  display: none;
+}
+
+#page-count {
+  background-color: #f6f4f4;
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+
+#page-count:hover {
+  background-color: #6a6fb3;
+}

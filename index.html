@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lovers</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div id="root">
+     <table id="table">
+      <thead>
+        <tr>
+         <td>
+           <input type="text" placeholder="Name" id="name-input" data-tooltip="Введите минимум 2 буквы">
+         </td>
+         <td>
+           <input type="text" placeholder="from" id="age-from">
+           <input type="text" placeholder="to" id="age-to">
+         </td>
+         <td>
+           <select name="gender" id="gender-select">
+             <option value="choose gender" active="true">choose gender</option>
+             <option value="male">male</option>
+             <option value="female">female</option>
+             <option value="both">both</option>
+            </select>
+         </td>
+          <td>
+            <button id="apply-button">Apply</button>
+            <button id="reset-button">Reset</button>
+            <button id="refreshLocalStorage" data-tooltip="Подождите пару минут перед следующим обновлением пользоватлей"> Refresh users</button>
+          </td>
+        </tr>
+      </thead>
+    <tbody id="tbody">
+    </tbody>
+  </table> 
+
+<div id="no-data" hidden>
+  <h2>No data...</h2>
+</div>
+
+  <div class="pagination">
+    <select name="onPage" id="on-page">
+      <option value="5">5</option>
+      <option value="10" selected>10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+      <option value="25">25</option>
+    </select>
+    <button id="prev">
+      Я
+    </button>
+
+    <div>
+        <span id="page-count">Page count</span>
+    </div>
+
+    <button id="next">
+      R
+    </button>
+  </div>
+
+  <div id="modal-confirm" class="modal">
+    
+        <div class="modal-header">
+          <span>Вы действительно хотите пригласить на свидание пользователя</span> 
+          <div>
+            <strong>name</strong>?
+          </div>
+        </div>
+        <div class="modal-body">
+          <button data-value="yes">YES</button>
+          <button data-value="no">NO</button>
+        </div>
+      </div>
+      
+      <div id="modal-success" class="modal">
+            <div class="modal-header">
+              <span>Приглашение отправлено</span> 
+            </div>
+            <div class="modal-body">
+              <button data-value="ok">OK</button>
+            </div>
+      </div>
+      
+      <div id="loading" class="modal">
+        <div class="modal-header">
+          <span>Loading</span> 
+        </div>
+      </div>
+
+  <div class="overlay" id="overlay"> </div>
+
+  </div>
+
+  <div class="overlay" id="instant-overlay">
+
+  </div>
+
+  <script src="index.js" type="module"></script>
+</body>
+</html>
