@@ -16,7 +16,7 @@ class Handlers {
 
  refreshButtonHandler = async () => {
 
-  if (document.querySelector('.tooltip')) hideTooltip(this.refreshButton)
+  if ( document.querySelector('.tooltip') ) hideTooltip(this.refreshButton)
 
     const cooldown = localStorage.getItem('cooldown')
     const now = Date.now()
@@ -65,7 +65,6 @@ class Handlers {
     await setPaginatorData({
       pageNumber: page > paginatorData.lastPage ? paginatorData.lastPage : page
     })
-
   }
 
  paginatorPrev = async () => {

@@ -1,9 +1,10 @@
-import { blankLink } from '../index.js'
 import { concatLink } from '../js/functions.js'
 import { showLoading, hideLoading } from './loading.js'
 import { showOverlay, hideOverlay } from './modals.js'
 
-const fetchList = []
+const blankLink = 'https://gorest.co.in/public-api/users?_format=json&access-token='
+
+let fetchList = []
 const listOfTokens = [
   // '2WNUfC2hkqMwRTcdLtmw_avT3j1sWqd2idel',
   // 'QmDQGIeUf26xjVoFAj898TYxYlv6O2BSkfUd',
@@ -47,7 +48,7 @@ class BruteForce {
   }
 
   getListOfAllUsers = async () => {
-    if (!localStorage.getItem('cooldown')) localStorage.setItem('cooldown', Date.now())
+    if (!localStorage.getItem('cooldown')) localStorage.setItem( 'cooldown', Date.now() )
     if ( localStorage.getItem('users') ) return JSON.parse(localStorage.getItem('users'))
     showLoading()
     showOverlay('instant')
@@ -55,19 +56,23 @@ class BruteForce {
     const pageCount = parseInt( await this.getPageCount() )
     const fetchesArray = this.concatArrayOfFetches(pageCount, blankLink)
     
-    const promiseArray = await Promise.all(fetchesArray)
-    const arrayOfResponses = await Promise.all( promiseArray.map( resp => resp.json()))
+    const arrayOfResponses = await Promise.all(fetchesArray)
+    let arrayOfParsed
+    try {
+      arrayOfParsed = await Promise.all( arrayOfResponses.map( resp => resp.clone().json()))
+    } catch (error) {
+      console.log(error)
+    }
     
-    const arrayOfUsers = arrayOfResponses.map(response => {
+    const arrayOfUsers = arrayOfParsed.map(response => {
       return response.result
     })
-    
     this.putToLocalStorage(arrayOfUsers)
     
     hideLoading()
     hideOverlay('instant')  
 
-    return JSON.parse(localStorage.getItem('users'))
+    return JSON.parse( localStorage.getItem('users') )
   }
   
   putToLocalStorage = (arrayOfUsers) => {
@@ -88,6 +93,8 @@ class BruteForce {
   }
   
   concatArrayOfFetches = (pageCount, blankLink) => {
+
+    fetchList = []
 
     for(let i = 1, j = 0; i < pageCount + 1; i++, j++) { 
       if (j === listOfTokens.length) j = 0; 

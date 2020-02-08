@@ -1,6 +1,5 @@
-import { tBody } from '../index.js'
+import { tBody, pageCount, nextButton, prevButton, noData } from './nodes.js'
 import bruteForce from './bruteForce.js'
-import { pageCount, nextButton, prevButton, noData } from '../index.js'
 import { showOverlay, hideOverlay } from './modals.js'
 import { hideLoading, showLoading } from './loading.js'
 
@@ -35,7 +34,6 @@ function setFilterData(data) {
 }
 
 function addToInvitedUsers(invitedUserId) {
-
   const usersFromStorage = JSON.parse( localStorage.getItem('invited') ) || []
 
   if ( usersFromStorage.includes(invitedUserId) ) {
@@ -43,9 +41,7 @@ function addToInvitedUsers(invitedUserId) {
   }
 
   usersFromStorage.push(invitedUserId)
-
   localStorage.setItem( 'invited', JSON.stringify(usersFromStorage) )
-
   buildTree()
 }
 
@@ -66,8 +62,6 @@ async function getList () {
   processedUsers = arrayOfUsers
 
   if ( localStorage.getItem('invited') ) {
-    
-
     const invitedusers = JSON.parse(localStorage.getItem('invited'))
     processedUsers = processedUsers.filter((user) => {
       return !invitedusers.includes(user.id)
@@ -76,20 +70,20 @@ async function getList () {
 
   const { name, ageFrom, ageTo, gender } = filterData
 
-    processedUsers = processedUsers.filter( user => {
-      return (
-        ( user.first_name.toLowerCase().startsWith( name.toLowerCase() ) 
-          ||
-          user.last_name.toLowerCase().startsWith ( name.toLowerCase() )
-        )
-          &&
-        ( calculateAge(user.dob) >= +ageFrom ) 
-          && 
-        ( calculateAge(user.dob) <= ( +ageTo || 100 ) ) 
-          &&
-        ( user.gender === gender || gender === 'both' )
+  processedUsers = processedUsers.filter( user => {
+    return (
+      ( user.first_name.toLowerCase().startsWith( name.toLowerCase() ) 
+        ||
+        user.last_name.toLowerCase().startsWith ( name.toLowerCase() )
       )
-    })
+        &&
+      ( calculateAge(user.dob) >= +ageFrom ) 
+        && 
+      ( calculateAge(user.dob) <= ( +ageTo || 100 ) ) 
+        &&
+      ( user.gender === gender || gender === 'both' )
+    )
+  })
 
   const { pageNumber, onPage } = paginatorData
 
@@ -116,11 +110,16 @@ async function buildTree(n) {
 
   
   pageCount.innerText = pageNumber + 1 + '/' + lastPageValue
+// else else
 
+  const pagination = document.getElementsByClassName('pagination')[0]
+  pagination.classList.remove('disabled')
+  prevButton.removeAttribute('disabled')
+  nextButton.removeAttribute('disabled')
+  // pageCount.classList.remove('disabled')
   if (pageNumber === 0) prevButton.setAttribute('disabled', 'true')
-  else prevButton.removeAttribute('disabled')
   if (pageNumber === lastPageValue - 1) nextButton.setAttribute('disabled', 'true')
-  else nextButton.removeAttribute('disabled')
+  if (lastPageValue === 0) pagination.classList.add('disabled')
 }
  
 function calculateAge(personDayOfBirth) {

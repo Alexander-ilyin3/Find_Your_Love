@@ -10,14 +10,13 @@ function showTooltip(target, cooldown) {
   if (cooldown) {
   function getDifference() {
       let differenceInSeconds = ( 120 - Math.floor( ( Date.now() - cooldown ) / 1000 ) )
-
+         if ( differenceInSeconds < 0 ) differenceInSeconds = 0
       return differenceInSeconds
     }
     
     interval = setTimeout(function run() {
       tooltipText = target.dataset.tooltip + `. Осталось ${getDifference()} секунд`
       tooltipContainer.innerHTML = tooltipText;
-    console.log(tooltipText)
     interval = setTimeout(run, 1000);
     }, 0);
 }

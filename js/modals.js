@@ -1,5 +1,5 @@
-import { overlay, modal, modalSuccess, instantOverlay } from '../index.js'
 import { addToInvitedUsers, processedUsers } from './functions.js'
+import { overlay, modal, modalSuccess, instantOverlay } from './nodes.js'
 
 let invitedUserId = null;
 
@@ -22,7 +22,6 @@ function modalHandler(e) {
 function modalSuccessHandler(e) {
   if (e && e.target.dataset.value === 'ok') {
      overlayHandler()
-
   } 
 }
 

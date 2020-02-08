@@ -80,12 +80,12 @@ tbody > tr:nth-child(2n-1) {
 
 .overlay.is-shown {
   pointer-events: auto;
-  opacity: 1;
+  opacity: .85;
 }
 
 #instant-overlay {
   transition: opacity 20ms ease-in;
-  background-color: #dfdfdf98;
+  background-color: #000000;
 }
 
 .modal-header {
@@ -159,4 +159,8 @@ tbody > tr:nth-child(2n-1) {
 
 #page-count:hover {
   background-color: #6a6fb3;
+}
+
+.disabled {
+  display: none;
 }

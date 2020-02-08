@@ -8,7 +8,6 @@ let interval
   let i = 0
     interval = setInterval(() => {
       i++
-      console.log(i)
       span.innerText += '.'
       if ( i === 4 ) { span.innerText = 'Loading' ; i = 0 }
       
